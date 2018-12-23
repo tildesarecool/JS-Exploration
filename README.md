@@ -17,4 +17,6 @@ Since it's been 18 months i guess I'm not going to be doing the youtube thing ab
 I decded maybe I would follow some of the courses I bought from udemy. I mean I bought enough courses I could try actually doing the courses.
 
 I'm doing this if this is of interest to anybody:
+
 https://www.udemy.com/how-to-program-games/learn/v4/overview
+
