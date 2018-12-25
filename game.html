@@ -8,6 +8,7 @@
 <canvas id="gameCanvas" width="800" height="600"></canvas>
 
 <script>
+    
 var ballX = 75;
 var ballY = 75;
 var ballSpeedX = 5;
@@ -17,7 +18,6 @@ const PADDLE_WIDTH = 100;
 const PADDLE_THICKNESS = 10;
 const PADDLE_DIST_FROM_EDGE = 60;
 var paddleX = 400;
-
 
 var canvas, canvasContext;
 
@@ -106,8 +106,6 @@ function drawAll() {
 
     colorRect(paddleX, canvas.height - PADDLE_DIST_FROM_EDGE, PADDLE_WIDTH, 
     PADDLE_THICKNESS, 'white');
-
-
 }
 
 function colorRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor) {
