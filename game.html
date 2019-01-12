@@ -14,6 +14,17 @@ var ballY = 75;
 var ballSpeedX = 5;
 var ballSpeedY = 5;
 
+// This is 2.19 in series (1/11/2019) 
+// this part will be replaced with arrays version later
+
+const BRICK_W = 100;
+const BRICK_H = 50;
+const BRICK_COUNT = 4;
+
+
+
+///////////////////////////////////////////////////
+
 const PADDLE_WIDTH = 100;
 const PADDLE_THICKNESS = 10;
 const PADDLE_DIST_FROM_EDGE = 60;
@@ -103,13 +114,19 @@ function moveAll() {
 }
 
 
+function drawBricks() {
+    colorRect(0,0, BRICK_W,BRICK_H, 'blue');
+}
+
 function drawAll() {
 	colorRect(0,0, canvas.width,canvas.height, 'black'); // clear screen
 
 	colorCircle(ballX,ballY, 10, 'white'); // draw ball
 
 	colorRect(paddleX, canvas.height-PADDLE_DIST_FROM_EDGE,
-				PADDLE_WIDTH, PADDLE_THICKNESS, 'white');
+                PADDLE_WIDTH, PADDLE_THICKNESS, 'white');
+                
+    drawBricks();
 
 	colorText(mouseX+","+mouseY, mouseX, mouseY, 'yellow');
 }
