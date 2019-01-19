@@ -22,14 +22,19 @@ var ballSpeedY = 5;
 
 const BRICK_W = 100;
 const BRICK_H = 50;
-const BRICK_COUNT = 4;
+const BRICK_COUNT = 8;
 //var brick0 = true;
 //var brick1 = true;
 //var brick2 = true;
 //var brick3 = true;
 
-var brickGride = [ true, true, true, true ];
-// shorthand for the varialbes version, can do brickgride[0] = false
+// replacing this line with a "new Array()" line to auto-generate bricks
+//var brickGrid = [ true, true, true, true ];
+// shorthand for the varialbes version, can do brickgrid[0] = false
+
+// Also function brickReset is new with this below
+var brickGrid = new Array(BRICK_COUNT);
+
 
 
 ///////////////////////////////////////////////////
@@ -54,6 +59,13 @@ function updateMousePos(evt) {
 	paddleX = mouseX - PADDLE_WIDTH/2;
 }
 
+function brickReset() {
+    for ( var i = 0; i < BRICK_COUNT; i++) {
+        brickGrid[i] = true;
+    }
+}
+
+
 window.onload = function() {
     //var ballX = 0;
     canvas = document.getElementById('gameCanvas');
@@ -63,6 +75,8 @@ window.onload = function() {
     setInterval(updateAll, 1000/framesPerSecond);
 
     canvas.addEventListener('mousemove', updateMousePos);
+
+    brickReset();
 }
 
 function updateAll() {
@@ -123,17 +137,26 @@ function moveAll() {
 }
 
 function drawBricks() {
-    if (brickGride[0]) {
+/*
+    if (brickGrid[0]) {
         colorRect(BRICK_W*0,0, BRICK_W-2,BRICK_H, 'blue');
     }
-    if (brickGride[1]) {
+    if (brickGrid[1]) {
         colorRect(BRICK_W*1,0, BRICK_W-2,BRICK_H, 'blue');
     }
-    if (brickGride[2]) {
+    if (brickGrid[2]) {
         colorRect(BRICK_W*2,0, BRICK_W-2,BRICK_H, 'blue');
     }
-    if (brickGride[3]) {
+    if (brickGrid[3]) {
         colorRect(BRICK_W*3,0, BRICK_W-2,BRICK_H, 'blue');
+    }
+
+    //22.4: using a for loop
+*/
+    for (var i = 0; i < BRICK_COUNT; i++) {
+        if ( brickGrid[i]) {
+            colorRect(BRICK_W * i,0, BRICK_W-2,BRICK_H, 'blue')
+        }
     }
 }
 
