@@ -17,17 +17,19 @@ var ballSpeedY = 5;
 // This is 2.19 in series (1/11/2019) 
 // this part will be replaced with arrays version later
 
-// 1/18/2019 - made it to 2.23
+// 1/18/2019 - made it to 2.24
 
 
 const BRICK_W = 100;
 const BRICK_H = 50;
 const BRICK_COUNT = 4;
-var brick0 = true;
-var brick1 = true;
-var brick2 = true;
-var brick3 = true;
+//var brick0 = true;
+//var brick1 = true;
+//var brick2 = true;
+//var brick3 = true;
 
+var brickGride = [ true, true, true, true ];
+// shorthand for the varialbes version, can do brickgride[0] = false
 
 
 ///////////////////////////////////////////////////
@@ -121,16 +123,16 @@ function moveAll() {
 }
 
 function drawBricks() {
-    if (brick0) {
+    if (brickGride[0]) {
         colorRect(BRICK_W*0,0, BRICK_W-2,BRICK_H, 'blue');
     }
-    if (brick1) {
+    if (brickGride[1]) {
         colorRect(BRICK_W*1,0, BRICK_W-2,BRICK_H, 'blue');
     }
-    if (brick2) {
+    if (brickGride[2]) {
         colorRect(BRICK_W*2,0, BRICK_W-2,BRICK_H, 'blue');
     }
-    if (brick3) {
+    if (brickGride[3]) {
         colorRect(BRICK_W*3,0, BRICK_W-2,BRICK_H, 'blue');
     }
 }
