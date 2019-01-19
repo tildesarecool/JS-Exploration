@@ -17,9 +17,16 @@ var ballSpeedY = 5;
 // This is 2.19 in series (1/11/2019) 
 // this part will be replaced with arrays version later
 
+// 1/18/2019 - made it to 2.23
+
+
 const BRICK_W = 100;
 const BRICK_H = 50;
 const BRICK_COUNT = 4;
+var brick0 = true;
+var brick1 = true;
+var brick2 = true;
+var brick3 = true;
 
 
 
@@ -114,10 +121,22 @@ function moveAll() {
 }
 
 function drawBricks() {
-    colorRect(0,0, BRICK_W,BRICK_H, 'blue');
+    if (brick0) {
+        colorRect(BRICK_W*0,0, BRICK_W-2,BRICK_H, 'blue');
+    }
+    if (brick1) {
+        colorRect(BRICK_W*1,0, BRICK_W-2,BRICK_H, 'blue');
+    }
+    if (brick2) {
+        colorRect(BRICK_W*2,0, BRICK_W-2,BRICK_H, 'blue');
+    }
+    if (brick3) {
+        colorRect(BRICK_W*3,0, BRICK_W-2,BRICK_H, 'blue');
+    }
 }
 
 function drawAll() {
+    
 	colorRect(0,0, canvas.width,canvas.height, 'black'); // clear screen
 
 	colorCircle(ballX,ballY, 10, 'white'); // draw ball
