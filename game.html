@@ -17,7 +17,7 @@ var ballSpeedY = 5;
 // This is 2.19 in series (1/11/2019) 
 // this part will be replaced with arrays version later
 
-// 1/18/2019 - made it to 2.24
+// 1/18/2019 - made it to 2.26
 
 
 const BRICK_W = 100;
@@ -61,8 +61,17 @@ function updateMousePos(evt) {
 
 function brickReset() {
     for ( var i = 0; i < BRICK_COUNT; i++) {
-        brickGrid[i] = true;
+            // this is supposed to help later for vertical grid
+            if ( Math.random() < 0.5) {
+                brickGrid[i] = true;
+            } else {
+                brickGrid[i] = false;
+            }
     }
+    // just a little confirming
+    //brickGrid[5] = false;
+
+
 }
 
 
