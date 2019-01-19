@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta content="text/html;charset=utf-8" http-equiv="Content=Type">
-    <meta content="utf-8" http-equiv="encoding"> 
-</head>
-<body>
-<canvas id="gameCanvas" width="800" height="600"></canvas>
-
-<script>
-
 var ballX = 75;
 var ballY = 75;
 var ballSpeedX = 5;
@@ -18,17 +7,18 @@ var ballSpeedY = 5;
 // this part will be replaced with arrays version later
 
 // 1/18/2019 - made it to 2.26
-// 1/18/2019 - made it to 3.28
+// 1/18/2019 - made it to 3.28: separated the HTML file from the JS file even though the instructor hadn't suggested it
+// some how just makes it feel better this way.
+
 
 
 
 const BRICK_W = 100;
 const BRICK_H = 50;
+const BRICK_GAP = 2;
 const BRICK_COUNT = 8;
-//var brick0 = true;
-//var brick1 = true;
-//var brick2 = true;
-//var brick3 = true;
+const BRICK_ROWS = 4;
+
 
 // replacing this line with a "new Array()" line to auto-generate bricks
 //var brickGrid = [ true, true, true, true ];
@@ -64,11 +54,12 @@ function updateMousePos(evt) {
 function brickReset() {
     for ( var i = 0; i < BRICK_COUNT; i++) {
             // this is supposed to help later for vertical grid
-            if ( Math.random() < 0.5) {
+            /*if ( Math.random() < 0.5) {
                 brickGrid[i] = true;
             } else {
                 brickGrid[i] = false;
-            } // end else
+            } */ // end else
+            brickGrid[i] = true;
     } // end for-loop for bricks
     // just a little confirming
     //brickGrid[5] = false;
@@ -146,28 +137,21 @@ function moveAll() {
 }
 
 function drawBricks() {
-/*
-    if (brickGrid[0]) {
-        colorRect(BRICK_W*0,0, BRICK_W-2,BRICK_H, 'blue');
-    }
-    if (brickGrid[1]) {
-        colorRect(BRICK_W*1,0, BRICK_W-2,BRICK_H, 'blue');
-    }
-    if (brickGrid[2]) {
-        colorRect(BRICK_W*2,0, BRICK_W-2,BRICK_H, 'blue');
-    }
-    if (brickGrid[3]) {
-        colorRect(BRICK_W*3,0, BRICK_W-2,BRICK_H, 'blue');
-    }
-
-    //22.4: using a for loop
-*/
-    for (var i = 0; i < BRICK_COUNT; i++) {
-        if ( brickGrid[i]) {
-            colorRect(BRICK_W * i,0, BRICK_W-2,BRICK_H, 'blue')
+    for (var eachRow = 0; eachRow < BRICK_ROWS; eachRow++) {
+        for ( var i = 0; i < BRICK_COUNT; i++ ) {
+            if ( brickGrid[i]) { 
+                colorRect(BRICK_W * i,BRICK_H*eachRow, BRICK_W-BRICK_GAP,BRICK_H - BRICK_GAP, 'blue');
+            }
+               
         }
     }
 }
+/*    for (var i = 0; i < BRICK_COUNT; i++) {
+        if ( brickGrid[i]) {
+            colorRect(BRICK_W * i,BRICK_H, BRICK_W-BRICK_GAP,BRICK_H - BRICK_GAP, 'blue');
+        }
+    }*/
+
 
 function drawAll() {
     
@@ -180,7 +164,11 @@ function drawAll() {
                 
     drawBricks();
 
-	colorText(mouseX+","+mouseY, mouseX, mouseY, 'yellow');
+    // Added at 3.37 - two variables and modifed the colorText call; 
+    // apparently this is related to the text that shows next to the mouse cursor
+    var mouseBrickCol = mouseX / BRICK_W;
+    var mouseBrickRow = mouseY / BRICK_H;
+	colorText(mouseBrickCol+","+mouseBrickRow, mouseX, mouseY, 'yellow');
 }
 
 function colorRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor) {
@@ -199,7 +187,3 @@ function colorText(showWords, textX,textY, fillColor) {
 	canvasContext.fillStyle = fillColor;
 	canvasContext.fillText(showWords, textX, textY);
 }
-
-</script>
-</body>
-</html>
