@@ -9,15 +9,15 @@ var ballSpeedY = 5;
 // 1/18/2019 - made it to 2.26
 // 1/18/2019 - made it to 3.28: separated the HTML file from the JS file even though the instructor hadn't suggested it
 // some how just makes it feel better this way.
+// 1/19/2018 - made it to 3.32
 
 
 
-
-const BRICK_W = 100;
-const BRICK_H = 50;
+const BRICK_W = 80;
+const BRICK_H = 20;
 const BRICK_GAP = 2;
-const BRICK_COUNT = 8;
-const BRICK_ROWS = 4;
+const BRICK_COLS = 10;
+const BRICK_ROWS = 14;
 
 
 // replacing this line with a "new Array()" line to auto-generate bricks
@@ -25,7 +25,7 @@ const BRICK_ROWS = 4;
 // shorthand for the varialbes version, can do brickgrid[0] = false
 
 // Also function brickReset is new with this below
-var brickGrid = new Array(BRICK_COUNT);
+var brickGrid = new Array(BRICK_COLS * BRICK_ROWS);
 
 
 
@@ -52,17 +52,15 @@ function updateMousePos(evt) {
 }
 
 function brickReset() {
-    for ( var i = 0; i < BRICK_COUNT; i++) {
+    for ( var i = -1; i < BRICK_COLS * BRICK_ROWS; i++) {
             // this is supposed to help later for vertical grid
-            /*if ( Math.random() < 0.5) {
+         
                 brickGrid[i] = true;
-            } else {
-                brickGrid[i] = false;
-            } */ // end else
-            brickGrid[i] = true;
+           
+           // brickGrid[i] = true;
     } // end for-loop for bricks
     // just a little confirming
-    //brickGrid[5] = false;
+   // brickGrid[16] = false;
 } // end function 
 
 
@@ -113,6 +111,16 @@ function moveAll() {
         ballReset();
     }
 
+    var ballBrickCol = Math.floor(ballX / BRICK_W);
+    var ballBrickRow = Math.floor(ballY / BRICK_H);
+    var brickIndexUnderBall = rowColToArrayIndex(ballBrickCol, ballBrickRow);
+   // colorText(ballBrickCol+","+ballBrickRow+":"+brickIndexUnderBall, mouseX, mouseY, 'yellow');
+    
+    if (brickIndexUnderBall >= 0  && 
+        brickIndexUnderBall < BRICK_COLS * BRICK_ROWS) {
+        brickGrid[brickIndexUnderBall] = false;
+    } 
+
     var paddleTopEdgeY = canvas.height - PADDLE_DIST_FROM_EDGE;
     var paddleBottomEdgeY = paddleTopEdgeY + PADDLE_THICKNESS;
 
@@ -132,15 +140,23 @@ function moveAll() {
 
          }
 
-   console.log("X is " + ballX);
-   console.log(" while Y is " + ballY);
+  // console.log("X is " + ballX);
+  // console.log(" while Y is " + ballY);
 }
+
+function rowColToArrayIndex(col, row) {
+    return col + BRICK_COLS * row;
+}
+
 
 function drawBricks() {
     for (var eachRow = 0; eachRow < BRICK_ROWS; eachRow++) {
-        for ( var i = 0; i < BRICK_COUNT; i++ ) {
-            if ( brickGrid[i]) { 
-                colorRect(BRICK_W * i,BRICK_H*eachRow, BRICK_W-BRICK_GAP,BRICK_H - BRICK_GAP, 'blue');
+        for ( var eachCol = 0; eachCol < BRICK_COLS; eachCol++ ) {
+
+            var arrayIndex = rowColToArrayIndex(eachCol, eachRow);
+
+            if ( brickGrid[arrayIndex]) { 
+                colorRect(BRICK_W * eachCol,BRICK_H*eachRow, BRICK_W-BRICK_GAP,BRICK_H - BRICK_GAP, 'blue');
             }
                
         }
@@ -164,11 +180,18 @@ function drawAll() {
                 
     drawBricks();
 
-    // Added at 3.37 - two variables and modifed the colorText call; 
+    // Added at 3.27 - two variables and modifed the colorText call; 
     // apparently this is related to the text that shows next to the mouse cursor
-    var mouseBrickCol = mouseX / BRICK_W;
-    var mouseBrickRow = mouseY / BRICK_H;
-	colorText(mouseBrickCol+","+mouseBrickRow, mouseX, mouseY, 'yellow');
+    // 3.32 - added the math.floor to shave off decimal points
+    /* var mouseBrickCol = Math.floor(mouseX / BRICK_W);
+    var mouseBrickRow = Math.floor(mouseY / BRICK_H);
+    var brickIndexUnderMouse = rowColToArrayIndex(mouseBrickCol, mouseBrickRow);
+   // colorText(mouseBrickCol+","+mouseBrickRow+":"+brickIndexUnderMouse, mouseX, mouseY, 'yellow');
+    
+    if (brickIndexUnderMouse >= 0  && 
+        brickIndexUnderMouse < BRICK_COLS * BRICK_ROWS) {
+        brickGrid[brickIndexUnderMouse] = false;
+        } */
 }
 
 function colorRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor) {
