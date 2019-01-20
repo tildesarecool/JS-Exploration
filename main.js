@@ -75,6 +75,7 @@ window.onload = function() {
     canvas.addEventListener('mousemove', updateMousePos);
 
     brickReset();
+    // ballReset(); // good idea? (section 38) - will cause issues with side brick bouncing
 }
 
 function updateAll() {
