@@ -118,7 +118,11 @@ function moveAll() {
   
    if (ballBrickCol >= 0 && ballBrickCol < BRICK_COLS &&
        ballBrickRow >= 0 && ballBrickRow < BRICK_ROWS) {
-       brickGrid[brickIndexUnderBall] = false;
+
+        if (brickGrid[brickIndexUnderBall]) {
+            brickGrid[brickIndexUnderBall] = false;
+            ballSpeedY *= -1;
+        }
    }
 
 /*   
