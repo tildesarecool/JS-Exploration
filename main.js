@@ -60,8 +60,8 @@ function brickReset() {
            // brickGrid[i] = true;
     } // end for-loop for bricks
     // just a little confirming
-   // brickGrid[16] = false;
-} // end function 
+    // brickGrid[16] = false;
+}   // end function 
 
 
 window.onload = function() {
@@ -115,12 +115,18 @@ function moveAll() {
     var ballBrickRow = Math.floor(ballY / BRICK_H);
     var brickIndexUnderBall = rowColToArrayIndex(ballBrickCol, ballBrickRow);
    // colorText(ballBrickCol+","+ballBrickRow+":"+brickIndexUnderBall, mouseX, mouseY, 'yellow');
-    
+  
+   if (ballBrickCol >= 0 && ballBrickCol < BRICK_COLS &&
+       ballBrickRow >= 0 && ballBrickRow < BRICK_ROWS) {
+       brickGrid[brickIndexUnderBall] = false;
+   }
+
+/*   
     if (brickIndexUnderBall >= 0  && 
         brickIndexUnderBall < BRICK_COLS * BRICK_ROWS) {
         brickGrid[brickIndexUnderBall] = false;
     } 
-
+*/
     var paddleTopEdgeY = canvas.height - PADDLE_DIST_FROM_EDGE;
     var paddleBottomEdgeY = paddleTopEdgeY + PADDLE_THICKNESS;
 
