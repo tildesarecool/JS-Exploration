@@ -44,7 +44,7 @@ function updateMousePos(evt) {
     // cheat/hack code for testing (section 43) for ball in any position
     ballX = mouseX;
     ballY = mouseY;
-    ballSpeedX = 3; 
+    ballSpeedX = 4;  // changed from 3 to 4 in sect 44
     ballSpeedY = -4
 
 }
@@ -57,8 +57,6 @@ function brickReset() {
            
            // brickGrid[i] = true;
     } // end for-loop for bricks
-    // just a little confirming
-    // brickGrid[16] = false;
 }   // end function 
 
 
@@ -122,12 +120,28 @@ function ballBrickHandling() {
             var prevBallY = ballY - ballSpeedY;
             var prevBrickCol = Math.floor(prevBallX / BRICK_W);
             var prevBrickRow = Math.floor(prevBallY / BRICK_H);
+            
+            var bothTestsFailed = true;
 
             if (prevBrickCol != ballBrickCol) {
-                ballSpeedY *= -1;
+                var adjBrickSide = rowColToArrayIndex(prevBrickCol, ballBrickRow);
+                
+                if (brickGrid[adjBrickSide] == false) {
+                    ballSpeedY *= -1;
+                    bothTestsFailed = false;
+                }
             }
 
             if (prevBrickRow != ballBrickRow) {
+                var adjBrickTopBot = rowColToArrayIndex(ballBrickCol, prevBrickRow);
+                if (brickGrid[adjBrickTopBot] == false) {
+                    ballSpeedY *= -1;
+                    bothTestsFailed = false;
+                }
+            }
+
+            if (bothTestsFailed) { // "armpit case" - passes through corner with no bouncing (section 44, around 5min30 in)
+                ballSpeedX *= -1;
                 ballSpeedY *= -1;
             }
         } // end of brick found
