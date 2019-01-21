@@ -39,7 +39,14 @@ function updateMousePos(evt) {
 	mouseX = evt.clientX - rect.left - root.scrollLeft;
 	mouseY = evt.clientY - rect.top - root.scrollTop;
 
-	paddleX = mouseX - PADDLE_WIDTH/2;
+    paddleX = mouseX - PADDLE_WIDTH/2;
+    
+    // cheat/hack code for testing (section 43) for ball in any position
+    ballX = mouseX;
+    ballY = mouseY;
+    ballSpeedX = 3; 
+    ballSpeedY = -4
+
 }
 
 function brickReset() {
