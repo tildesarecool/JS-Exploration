@@ -55,7 +55,6 @@ function brickReset() {
          
                 brickGrid[i] = true;
            
-           // brickGrid[i] = true;
     } // end for-loop for bricks
 }   // end function 
 
