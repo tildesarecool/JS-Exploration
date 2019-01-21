@@ -9,10 +9,10 @@ var ballSpeedY = 5;
 // which git is upposed to make unnecessary but i did it anyway
 
 const BRICK_W = 80;
-const BRICK_H = 20;
+const BRICK_H = 40; // changed to 40 tall in sect 41 as part of side-brick development - temp
 const BRICK_GAP = 2;
 const BRICK_COLS = 10;
-const BRICK_ROWS = 14;
+const BRICK_ROWS = 7; // changed to 7 rows in sect 41 as part of side-brick development - temp
 
 
 
@@ -56,7 +56,6 @@ function brickReset() {
 
 
 window.onload = function() {
-    //var ballX = 0;
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
 
@@ -105,14 +104,25 @@ function ballBrickHandling() {
     var ballBrickCol = Math.floor(ballX / BRICK_W);
     var ballBrickRow = Math.floor(ballY / BRICK_H);
     var brickIndexUnderBall = rowColToArrayIndex(ballBrickCol, ballBrickRow);
-   // colorText(ballBrickCol+","+ballBrickRow+":"+brickIndexUnderBall, mouseX, mouseY, 'yellow');
   
    if (ballBrickCol >= 0 && ballBrickCol < BRICK_COLS &&
        ballBrickRow >= 0 && ballBrickRow < BRICK_ROWS) {
 
         if (brickGrid[brickIndexUnderBall]) {
             brickGrid[brickIndexUnderBall] = false;
-            ballSpeedY *= -1;
+
+            var prevBallX = ballX - ballSpeedX;
+            var prevBallY = ballY - ballSpeedY;
+            var prevBrickCol = Math.floor(prevBallX / BRICK_W);
+            var prevBrickRow = Math.floor(prevBallY / BRICK_H);
+
+            if (prevBrickCol != ballBrickCol) {
+                ballSpeedY *= -1;
+            }
+
+            if (prevBrickRow != ballBrickRow) {
+                ballSpeedY *= -1;
+            }
         } // end of brick found
    } // end of valid col and row
 
