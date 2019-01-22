@@ -9,15 +9,15 @@ var ballSpeedY = 5;
 // which git is upposed to make unnecessary but i did it anyway
 
 const BRICK_W = 80;
-const BRICK_H = 40; // changed to 40 tall in sect 41 as part of side-brick development - temp
+const BRICK_H = 20; 
 const BRICK_GAP = 2;
 const BRICK_COLS = 10;
-const BRICK_ROWS = 7; // changed to 7 rows in sect 41 as part of side-brick development - temp
+const BRICK_ROWS = 14; 
 
 
 
 var brickGrid = new Array(BRICK_COLS * BRICK_ROWS);
-
+var bricksLeft = 0;
 
 
 ///////////////////////////////////////////////////
@@ -42,19 +42,28 @@ function updateMousePos(evt) {
     paddleX = mouseX - PADDLE_WIDTH/2;
     
     // cheat/hack code for testing (section 43) for ball in any position
+    // took this out (leave comment) for seciton 5.49
+    /*
     ballX = mouseX;
     ballY = mouseY;
     ballSpeedX = 4;  // changed from 3 to 4 in sect 44
     ballSpeedY = -4
+    */
 
 }
 
 function brickReset() {
-    for ( var i = -1; i < BRICK_COLS * BRICK_ROWS; i++) {
+    bricksLeft = 0;
+    var i;
+    for ( i = 0; i < 3 * BRICK_COLS; i++) { // section 5.47: 3 brick wide (thick?) gap at top
+        brickGrid[i] = false;
+    }
+
+    for ( ; i < BRICK_COLS * BRICK_ROWS; i++) {
             // this is supposed to help later for vertical grid
          
                 brickGrid[i] = true;
-           
+           bricksLeft++;
     } // end for-loop for bricks
 }   // end function 
 
@@ -69,6 +78,7 @@ window.onload = function() {
     canvas.addEventListener('mousemove', updateMousePos);
 
     brickReset();
+    ballReset();
 }
 
 function updateAll() {
@@ -101,7 +111,20 @@ function ballMove() {
  
      if (ballY > canvas.height) { // bottom
          ballReset();
+         brickReset(); // added section 5.49
      }
+}
+
+function isBrickAtColRow(col, row) {
+    if (col >= 0 && col < BRICK_COLS &&
+        row >= 0 && row < BRICK_ROWS) {
+
+        var brickIndexUnderCoord = rowColToArrayIndex(col, row);
+        return brickGrid[brickIndexUnderCoord];
+        
+    } else {
+        return false;
+    }
 }
 
 function ballBrickHandling() {
@@ -112,8 +135,10 @@ function ballBrickHandling() {
    if (ballBrickCol >= 0 && ballBrickCol < BRICK_COLS &&
        ballBrickRow >= 0 && ballBrickRow < BRICK_ROWS) {
 
-        if (brickGrid[brickIndexUnderBall]) {
+        if (isBrickAtColRow(ballBrickCol, ballBrickRow)) {
             brickGrid[brickIndexUnderBall] = false;
+            bricksLeft--;
+            console.log(bricksLeft);  // section 5.46
 
             var prevBallX = ballX - ballSpeedX;
             var prevBallY = ballY - ballSpeedY;
@@ -123,17 +148,17 @@ function ballBrickHandling() {
             var bothTestsFailed = true;
 
             if (prevBrickCol != ballBrickCol) {
-                var adjBrickSide = rowColToArrayIndex(prevBrickCol, ballBrickRow);
-                
-                if (brickGrid[adjBrickSide] == false) {
-                    ballSpeedY *= -1;
+                if (isBrickAtColRow(prevBrickCol, ballBrickRow) == false)
+                {
+                    ballSpeedX *= -1
                     bothTestsFailed = false;
                 }
+                
+                
             }
 
             if (prevBrickRow != ballBrickRow) {
-                var adjBrickTopBot = rowColToArrayIndex(ballBrickCol, prevBrickRow);
-                if (brickGrid[adjBrickTopBot] == false) {
+                if (isBrickAtColRow(ballBrickCol, prevBrickRow) == false) {
                     ballSpeedY *= -1;
                     bothTestsFailed = false;
                 }
@@ -166,9 +191,13 @@ function ballPaddleHandling() {
          var ballDistFromPaddleCenterX = ballX - centerOfPaddleX;
          ballSpeedX = ballDistFromPaddleCenterX * 0.35;
 
-         }
+            if (bricksLeft == 0) { // section 5.48: reset after all bricks gone (and ball touches paddle)
+                brickReset();
+            } // out of bricks
 
-}
+         } // ball center inside paddle
+
+}  // end of ballPaddleHandling()
 
 
 function moveAll() {
