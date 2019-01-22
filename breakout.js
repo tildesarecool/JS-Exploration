@@ -97,15 +97,15 @@ function ballMove() {
     ballX += ballSpeedX;
     ballY += ballSpeedY;
  
-     if (ballX  < 0 ) {  // left
+     if (ballX  < 0 && ballSpeedX < 0.0 ) {  // left -- modified in section 5.52
          ballSpeedX *= -1;
      }
  
-     if (ballX > canvas.width) { // right
+     if (ballX > canvas.width && ballSpeedX > 0.0 ) { // right -- modified in section 5.52
          ballSpeedX *= -1;
      } 
  
-     if (ballY < 0 ) {   // top
+     if (ballY < 0 && ballSpeedY < 0.0 ) {   // top -- modified in section 5.52
          ballSpeedY *= -1;
      }
  
