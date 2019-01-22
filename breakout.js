@@ -138,7 +138,7 @@ function ballBrickHandling() {
         if (isBrickAtColRow(ballBrickCol, ballBrickRow)) {
             brickGrid[brickIndexUnderBall] = false;
             bricksLeft--;
-            console.log(bricksLeft);  // section 5.46
+           // console.log(bricksLeft);  // section 5.46 - commented out for 5.53
 
             var prevBallX = ballX - ballSpeedX;
             var prevBallY = ballY - ballSpeedY;
