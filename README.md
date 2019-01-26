@@ -12,6 +12,8 @@ I figured I'd break a little bit and try to even more understand the underlying 
 
 I'm think of trying "100 days of code" since I've already got 4 or 5 days in row anyway.
 
+Maybe I'll try my own version of breakout. Or some variation using the contents from "The Coding Train". That could be a thing.
+
 23 December 2018
 
 Since it's been 18 months i guess I'm not going to be doing the youtube thing above.
