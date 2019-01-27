@@ -8,11 +8,11 @@ var ballSpeedY = 5;
 // since re-factoring is happening I split into separate file
 // which git is upposed to make unnecessary but i did it anyway
 
-const TRACK_W = 80;
-const TRACK_H = 20; 
+const TRACK_W = 40;
+const TRACK_H = 40; 
 const TRACK_GAP = 2;
-const TRACK_COLS = 10;
-const TRACK_ROWS = 14; 
+const TRACK_COLS = 20;
+const TRACK_ROWS = 15; 
 
 
 
@@ -50,12 +50,9 @@ function updateMousePos(evt) {
 
 function trackReset() {
     tracksLeft = 0;
-    var i;
-    for ( i = 0; i < 3 * TRACK_COLS; i++) { // section 5.47: 3 track wide (thick?) gap at top
-        trackGrid[i] = false;
-    }
 
-    for ( ; i < TRACK_COLS * TRACK_ROWS; i++) {
+
+    for ( i = 0; i < TRACK_COLS * TRACK_ROWS; i++) {
             // this is supposed to help later for vertical grid
          
                 trackGrid[i] = true;
