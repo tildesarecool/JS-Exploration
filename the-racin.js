@@ -15,13 +15,27 @@ const TRACK_COLS = 20;
 const TRACK_ROWS = 15; 
 
 
+// 1 and 0s instead of true/false
+// coulse also use other numbers for different assets like flags or trees
+// so this is a semi-visual way to layout the track
+var trackGrid = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+                 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ];
 
-var trackGrid = new Array(TRACK_COLS * TRACK_ROWS);
-var tracksLeft = 0;
 
-
-///////////////////////////////////////////////////
-
+var trackLeft = 0;
 
 var canvas, canvasContext;
 
@@ -36,29 +50,11 @@ function updateMousePos(evt) {
 	mouseY = evt.clientY - rect.top - root.scrollTop;
 
 
-    
-    // cheat/hack code for testing (section 43) for ball in any position
-    // took this out (leave comment) for seciton 5.49
-    /*
-    ballX = mouseX;
-    ballY = mouseY;
-    ballSpeedX = 4;  // changed from 3 to 4 in sect 44
-    ballSpeedY = -4
-    */
+
 
 }
 
-function trackReset() {
-    tracksLeft = 0;
 
-
-    for ( i = 0; i < TRACK_COLS * TRACK_ROWS; i++) {
-            // this is supposed to help later for vertical grid
-         
-                trackGrid[i] = true;
-           tracksLeft++;
-    } // end for-loop for tracks
-}   // end function 
 
 
 window.onload = function() {
@@ -70,7 +66,6 @@ window.onload = function() {
 
     canvas.addEventListener('mousemove', updateMousePos);
 
-    trackReset();
     ballReset();
 }
 
@@ -104,7 +99,7 @@ function ballMove() {
  
      if (ballY > canvas.height) { // bottom
          ballReset();
-         trackReset(); // added section 5.49
+       //  trackReset(); // added section 5.49
      }
 }
 
@@ -113,7 +108,7 @@ function isTrackAtColRow(col, row) {
         row >= 0 && row < TRACK_ROWS) {
 
         var trackIndexUnderCoord = rowColToArrayIndex(col, row);
-        return trackGrid[trackIndexUnderCoord];
+        return (trackGrid[trackIndexUnderCoord] == 1);
         
     } else {
         return false;
@@ -129,9 +124,6 @@ function ballTrackHandling() {
        ballTrackRow >= 0 && ballTrackRow < TRACK_ROWS) {
 
         if (isTrackAtColRow(ballTrackCol, ballTrackRow)) {
-            trackGrid[trackIndexUnderBall] = false;
-            tracksLeft--;
-           // console.log(tracksLeft);  // section 5.46 - commented out for 5.53
 
             var prevBallX = ballX - ballSpeedX;
             var prevBallY = ballY - ballSpeedY;
@@ -186,7 +178,7 @@ function drawTracks() {
 
             var arrayIndex = rowColToArrayIndex(eachCol, eachRow);
 
-            if ( trackGrid[arrayIndex]) { 
+            if ( trackGrid[arrayIndex] == 1 ) { 
                 colorRect(TRACK_W * eachCol,TRACK_H*eachRow, TRACK_W-TRACK_GAP,TRACK_H - TRACK_GAP, 'blue');
             }
                
