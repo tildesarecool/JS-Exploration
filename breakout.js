@@ -22,10 +22,6 @@ var bricksLeft = 0;
 
 ///////////////////////////////////////////////////
 
-const PADDLE_WIDTH = 100;
-const PADDLE_THICKNESS = 10;
-const PADDLE_DIST_FROM_EDGE = 60;
-var paddleX = 400;
 
 var canvas, canvasContext;
 
@@ -39,7 +35,7 @@ function updateMousePos(evt) {
 	mouseX = evt.clientX - rect.left - root.scrollLeft;
 	mouseY = evt.clientY - rect.top - root.scrollTop;
 
-    paddleX = mouseX - PADDLE_WIDTH/2;
+
     
     // cheat/hack code for testing (section 43) for ball in any position
     // took this out (leave comment) for seciton 5.49
@@ -173,38 +169,13 @@ function ballBrickHandling() {
 
 } // end of ballBrickHandling function
 
-function ballPaddleHandling() {
-    var paddleTopEdgeY = canvas.height - PADDLE_DIST_FROM_EDGE;
-    var paddleBottomEdgeY = paddleTopEdgeY + PADDLE_THICKNESS;
 
-    var paddleLeftEdgeX = paddleX;
-    var paddleRightEdgeX = paddleLeftEdgeX + PADDLE_WIDTH;
-
-    if ( ballY > paddleTopEdgeY &&  // below the top of paddle
-         ballY < paddleBottomEdgeY &&   //  above bottom of paddle
-         ballX > paddleLeftEdgeX &&   //  right of the left side of paddle
-         ballX < paddleRightEdgeX ) {  //  left of the right side of paddle
-
-         ballSpeedY *= -1;
-
-         var centerOfPaddleX = paddleX + PADDLE_WIDTH / 2;
-         var ballDistFromPaddleCenterX = ballX - centerOfPaddleX;
-         ballSpeedX = ballDistFromPaddleCenterX * 0.35;
-
-            if (bricksLeft == 0) { // section 5.48: reset after all bricks gone (and ball touches paddle)
-                brickReset();
-            } // out of bricks
-
-         } // ball center inside paddle
-
-}  // end of ballPaddleHandling()
 
 
 function moveAll() {
    
     ballMove();
     ballBrickHandling();
-    ballPaddleHandling();
 }
 
 function rowColToArrayIndex(col, row) {
@@ -233,8 +204,7 @@ function drawAll() {
 
 	colorCircle(ballX,ballY, 10, 'white'); // draw ball
 
-	colorRect(paddleX, canvas.height-PADDLE_DIST_FROM_EDGE,
-                PADDLE_WIDTH, PADDLE_THICKNESS, 'white');
+
                 
     drawBricks();
 
