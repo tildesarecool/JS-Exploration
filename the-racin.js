@@ -1,3 +1,7 @@
+// code for player1car.png - section 7.66
+var carPic = document.createElement("img");
+var carPicLoaded = false;
+
 var ballX = 75;
 var ballY = 75;
 var ballSpeedX = 5;
@@ -49,24 +53,23 @@ function updateMousePos(evt) {
 	mouseX = evt.clientX - rect.left - root.scrollLeft;
 	mouseY = evt.clientY - rect.top - root.scrollTop;
 
-
-
-
 }
 
-
-
-
 window.onload = function() {
-    canvas = document.getElementById('gameCanvas');
-    canvasContext = canvas.getContext('2d');
+	canvas = document.getElementById('gameCanvas');
+	canvasContext = canvas.getContext('2d');
 
-    var framesPerSecond = 30;
-    setInterval(updateAll, 1000/framesPerSecond);
+	var framesPerSecond = 30;
+	setInterval(updateAll, 1000/framesPerSecond);
 
-    canvas.addEventListener('mousemove', updateMousePos);
+	canvas.addEventListener('mousemove', updateMousePos);
 
-    ballReset();
+	carPic.onload = function() {
+		carPicLoaded = true;
+	}
+	carPic.src = "player1car.png";
+
+	ballReset();
 }
 
 function updateAll() {
@@ -170,7 +173,7 @@ function ballTrackHandling() {
 
 
 function moveAll() {
-	// ballMove();
+	 ballMove();
 	
 	ballTrackHandling();
 }
@@ -199,13 +202,15 @@ function drawAll() {
     
 	colorRect(0,0, canvas.width,canvas.height, 'black'); // clear screen
 
-	colorCircle(ballX,ballY, 10, 'white'); // draw ball
+    // colorCircle(ballX,ballY, 10, 'white'); // draw ball
+    
+    if (carPicLoaded) {
+        canvasContext.drawImage(carPic, 
+            ballX - carPic.width / 2,
+            ballY - carPic.height / 2);
+    }
 
-
-                
     drawTracks();
-
-
 }
 
 function colorRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor) {
