@@ -67,7 +67,7 @@ window.onload = function() {
 	carPic.onload = function() {
 		carPicLoaded = true;
 	}
-	carPic.src = "player1car.png";
+	carPic.src = "img/player1car.png";
 
 	ballReset();
 }
