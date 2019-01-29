@@ -2,10 +2,10 @@
 var carPic = document.createElement("img");
 var carPicLoaded = false;
 
-var ballX = 75;
-var ballY = 75;
-var ballSpeedX = 5;
-var ballSpeedY = 5;
+var carX = 75;
+var carY = 75;
+var carSpeedX = 5;
+var carSpeedY = 5;
 
 // 1/20/2019
 // section 4
@@ -69,7 +69,7 @@ window.onload = function() {
 	}
 	carPic.src = "img/player1car.png";
 
-	ballReset();
+	carReset();
 }
 
 function updateAll() {
@@ -77,14 +77,14 @@ function updateAll() {
     drawAll();
 }
 
-function ballReset() {
+function carReset() {
 	for(var eachRow=0;eachRow<TRACK_ROWS;eachRow++) {
 		for(var eachCol=0;eachCol<TRACK_COLS;eachCol++) {
 			var arrayIndex = rowColToArrayIndex(eachCol, eachRow); 
 			if(trackGrid[arrayIndex] == 2) {
 				trackGrid[arrayIndex] = 0;
-				ballX = eachCol * TRACK_W + TRACK_W/2;
-				ballY = eachRow * TRACK_H + TRACK_H/2;
+				carX = eachCol * TRACK_W + TRACK_W/2;
+				carY = eachRow * TRACK_H + TRACK_H/2;
 			}
 		}
 	}
@@ -92,24 +92,24 @@ function ballReset() {
 
 // part of re-factoring in section 4
 
-function ballMove() {
-    ballX += ballSpeedX;
-    ballY += ballSpeedY;
+function carMove() {
+    carX += carSpeedX;
+    carY += carSpeedY;
  
-     if (ballX  < 0 && ballSpeedX < 0.0 ) {  // left -- modified in section 5.52
-         ballSpeedX *= -1;
+     if (carX  < 0 && carSpeedX < 0.0 ) {  // left -- modified in section 5.52
+         carSpeedX *= -1;
      }
  
-     if (ballX > canvas.width && ballSpeedX > 0.0 ) { // right -- modified in section 5.52
-         ballSpeedX *= -1;
+     if (carX > canvas.width && carSpeedX > 0.0 ) { // right -- modified in section 5.52
+         carSpeedX *= -1;
      } 
  
-     if (ballY < 0 && ballSpeedY < 0.0 ) {   // top -- modified in section 5.52
-         ballSpeedY *= -1;
+     if (carY < 0 && carSpeedY < 0.0 ) {   // top -- modified in section 5.52
+         carSpeedY *= -1;
      }
  
-     if (ballY > canvas.height) { // bottom
-         ballReset();
+     if (carY > canvas.height) { // bottom
+         carReset();
        //  trackReset(); // added section 5.49
      }
 }
@@ -126,56 +126,56 @@ function isTrackAtColRow(col, row) {
     }
 }
 
-function ballTrackHandling() {
-    var ballTrackCol = Math.floor(ballX / TRACK_W);
-    var ballTrackRow = Math.floor(ballY / TRACK_H);
-    var trackIndexUnderBall = rowColToArrayIndex(ballTrackCol, ballTrackRow);
+function carTrackHandling() {
+    var carTrackCol = Math.floor(carX / TRACK_W);
+    var carTrackRow = Math.floor(carY / TRACK_H);
+    var trackIndexUnderCar = rowColToArrayIndex(carTrackCol, carTrackRow);
   
-   if (ballTrackCol >= 0 && ballTrackCol < TRACK_COLS &&
-       ballTrackRow >= 0 && ballTrackRow < TRACK_ROWS) {
+   if (carTrackCol >= 0 && carTrackCol < TRACK_COLS &&
+       carTrackRow >= 0 && carTrackRow < TRACK_ROWS) {
 
-        if (isTrackAtColRow(ballTrackCol, ballTrackRow)) {
+        if (isTrackAtColRow(carTrackCol, carTrackRow)) {
 
-            var prevBallX = ballX - ballSpeedX;
-            var prevBallY = ballY - ballSpeedY;
-            var prevTrackCol = Math.floor(prevBallX / TRACK_W);
-            var prevTrackRow = Math.floor(prevBallY / TRACK_H);
+            var prevCarX = carX - carSpeedX;
+            var prevCarY = carY - carSpeedY;
+            var prevTrackCol = Math.floor(prevCarX / TRACK_W);
+            var prevTrackRow = Math.floor(prevCarY / TRACK_H);
             
             var bothTestsFailed = true;
 
-            if (prevTrackCol != ballTrackCol) {
-                if (isTrackAtColRow(prevTrackCol, ballTrackRow) == false)
+            if (prevTrackCol != carTrackCol) {
+                if (isTrackAtColRow(prevTrackCol, carTrackRow) == false)
                 {
-                    ballSpeedX *= -1
+                    carSpeedX *= -1
                     bothTestsFailed = false;
                 }
                 
                 
             }
 
-            if (prevTrackRow != ballTrackRow) {
-                if (isTrackAtColRow(ballTrackCol, prevTrackRow) == false) {
-                    ballSpeedY *= -1;
+            if (prevTrackRow != carTrackRow) {
+                if (isTrackAtColRow(carTrackCol, prevTrackRow) == false) {
+                    carSpeedY *= -1;
                     bothTestsFailed = false;
                 }
             }
 
             if (bothTestsFailed) { // "armpit case" - passes through corner with no bouncing (section 44, around 5min30 in)
-                ballSpeedX *= -1;
-                ballSpeedY *= -1;
+                carSpeedX *= -1;
+                carSpeedY *= -1;
             }
         } // end of track found
    } // end of valid col and row
 
-} // end of ballTrackHandling function
+} // end of carTrackHandling function
 
 
 
 
 function moveAll() {
-	 ballMove();
+	 carMove();
 	
-	ballTrackHandling();
+	carTrackHandling();
 }
 
 function rowColToArrayIndex(col, row) {
@@ -202,12 +202,12 @@ function drawAll() {
     
 	colorRect(0,0, canvas.width,canvas.height, 'black'); // clear screen
 
-    // colorCircle(ballX,ballY, 10, 'white'); // draw ball
+    // colorCircle(carX,carY, 10, 'white'); // draw car
     
     if (carPicLoaded) {
         canvasContext.drawImage(carPic, 
-            ballX - carPic.width / 2,
-            ballY - carPic.height / 2);
+            carX - carPic.width / 2,
+            carY - carPic.height / 2);
     }
 
     drawTracks();
