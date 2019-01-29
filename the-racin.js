@@ -96,28 +96,14 @@ function carMove() {
     // carX += carSpeedX;
     // carY += carSpeedY;
 
+    // sect 8.71 and 72: something something trigonometry?
     carX += Math.cos(carAng) * carSpeed;
     carY += Math.sin(carAng) * carSpeed;
 
 
     carAng += 0.02;
  
-     if (carX  < 0 && carSpeedX < 0.0 ) {  // left -- modified in section 5.52
-         carSpeedX *= -1;
-     }
- 
-     if (carX > canvas.width && carSpeedX > 0.0 ) { // right -- modified in section 5.52
-         carSpeedX *= -1;
-     } 
- 
-     if (carY < 0 && carSpeedY < 0.0 ) {   // top -- modified in section 5.52
-         carSpeedY *= -1;
-     }
- 
-     if (carY > canvas.height) { // bottom
-         carReset();
-       //  trackReset(); // added section 5.49
-     }
+     
 }
 
 function isTrackAtColRow(col, row) {
@@ -141,35 +127,8 @@ function carTrackHandling() {
        carTrackRow >= 0 && carTrackRow < TRACK_ROWS) {
 
         if (isTrackAtColRow(carTrackCol, carTrackRow)) {
+            carSpeed *= -1; 
 
-            var prevCarX = carX - carSpeedX;
-            var prevCarY = carY - carSpeedY;
-            var prevTrackCol = Math.floor(prevCarX / TRACK_W);
-            var prevTrackRow = Math.floor(prevCarY / TRACK_H);
-            
-            var bothTestsFailed = true;
-
-            if (prevTrackCol != carTrackCol) {
-                if (isTrackAtColRow(prevTrackCol, carTrackRow) == false)
-                {
-                    carSpeedX *= -1
-                    bothTestsFailed = false;
-                }
-                
-                
-            }
-
-            if (prevTrackRow != carTrackRow) {
-                if (isTrackAtColRow(carTrackCol, prevTrackRow) == false) {
-                    carSpeedY *= -1;
-                    bothTestsFailed = false;
-                }
-            }
-
-            if (bothTestsFailed) { // "armpit case" - passes through corner with no bouncing (section 44, around 5min30 in)
-                carSpeedX *= -1;
-                carSpeedY *= -1;
-            }
         } // end of track found
    } // end of valid col and row
 
