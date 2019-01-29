@@ -5,8 +5,7 @@ var carPicLoaded = false;
 var carX = 75;
 var carY = 75;
 var carAng = 0;
-var carSpeedX = 5;
-var carSpeedY = 5;
+var carSpeed = 2;
 
 // 1/20/2019
 // section 4
@@ -96,6 +95,11 @@ function carReset() {
 function carMove() {
     // carX += carSpeedX;
     // carY += carSpeedY;
+
+    carX += Math.cos(carAng) * carSpeed;
+    carY += Math.sin(carAng) * carSpeed;
+
+
     carAng += 0.02;
  
      if (carX  < 0 && carSpeedX < 0.0 ) {  // left -- modified in section 5.52
