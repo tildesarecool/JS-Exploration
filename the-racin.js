@@ -1,4 +1,5 @@
 // code for player1car.png - section 7.66
+// start section 9: 1/28/2019
 var carPic = document.createElement("img");
 var carPicLoaded = false;
 
