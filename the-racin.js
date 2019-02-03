@@ -146,7 +146,8 @@ function carReset() {
 		for(var eachCol=0;eachCol<TRACK_COLS;eachCol++) {
 			var arrayIndex = rowColToArrayIndex(eachCol, eachRow); 
 			if(trackGrid[arrayIndex] == 2) {
-				trackGrid[arrayIndex] = 0;
+                trackGrid[arrayIndex] = 0;
+                carAng = -Math.PI / 2;
 				carX = eachCol * TRACK_W + TRACK_W/2;
 				carY = eachRow * TRACK_H + TRACK_H/2;
 			}
@@ -156,11 +157,14 @@ function carReset() {
 
 
 function carMove() {
+
+    carSpeed *= 0.97;
+
     if (keyHeld_Gas) {
-        carSpeed += 0.2;
+        carSpeed += 0.3;
     }
     if (keyHeld_Reverse) {
-        carSpeed -= 0.2;
+        carSpeed -= 0.3;
     }
 
     if (keyHeld_TurnLeft) {
@@ -203,7 +207,10 @@ function carTrackHandling() {
        carTrackRow >= 0 && carTrackRow < TRACK_ROWS) {
 
         if (isTrackAtColRow(carTrackCol, carTrackRow)) {
-            carSpeed *= -1; 
+            carX -= Math.cos(carAng) * carSpeed;
+            carY -= Math.sin(carAng) * carSpeed;
+            
+            carSpeed *= -0.5; 
 
         } // end of track found
    } // end of valid col and row
