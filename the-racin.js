@@ -8,6 +8,11 @@ var carY = 75;
 var carAng = 0;
 var carSpeed = 0;
 
+const GROUNDSPEED_DECAY_MULT = 0.94;
+const DRIVE_POWER = 0.5;
+const REVERSE_POWER = 0.2;
+const TURN_RATE = 0.03;
+
 // 1/20/2019
 // section 4
 // since re-factoring is happening I split into separate file
@@ -158,21 +163,21 @@ function carReset() {
 
 function carMove() {
 
-    carSpeed *= 0.97;
+    carSpeed *= GROUNDSPEED_DECAY_MULT;
 
     if (keyHeld_Gas) {
-        carSpeed += 0.3;
+        carSpeed += DRIVE_POWER;
     }
     if (keyHeld_Reverse) {
-        carSpeed -= 0.3;
+        carSpeed -= REVERSE_POWER;
     }
 
     if (keyHeld_TurnLeft) {
-        carAng -= 0.04;
+        carAng -= TURN_RATE;
     }
 
     if (keyHeld_TurnRight) {
-        carAng += 0.04;
+        carAng += TURN_RATE;
     }
 
 
@@ -180,7 +185,12 @@ function carMove() {
     carX += Math.cos(carAng) * carSpeed;
     carY += Math.sin(carAng) * carSpeed;
 
-
+/*
+const GROUNDSPEED_DECAY_MULT = 0.94;
+const DRIVE_POWER = 0.5;
+const REVERSE_POWER = 0.2;
+const TURN_RATE = 0.03;
+*/
     
  
      
