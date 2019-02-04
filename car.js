@@ -63,11 +63,7 @@ const TURN_RATE = 0.03;
 }
 
 function carDraw() {
-    if (carPicLoaded) {
-        drawBitmapCenteredWithRotation(carPic, carX, carY, carAng);
-    }
-
-
+    drawBitmapCenteredWithRotation(carPic, carX, carY, carAng);
 }
 /*
 carPic.onload = function() {
