@@ -25,13 +25,15 @@ function moveAll() {
 	carTrackHandling();
 }
 
+// clear screen no longer needed (12.93)
+/*
 function clearScreen() {
 	colorRect(0,0, canvas.width,canvas.height, 'black'); // clear screen
 }
-
+*/
 function drawAll() {
     
-    clearScreen();
+    //clearScreen();
     drawTracks();
     carDraw();
     
