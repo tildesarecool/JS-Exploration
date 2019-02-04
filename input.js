@@ -31,7 +31,7 @@ function updateMousePos(evt) {
 
 // 10.75: code for grabbing key codes for press/release
 function keyPressed(evt) {
-	 console.log("Key pressed: "+evt.keyCode);
+	 // console.log("Key pressed: "+evt.keyCode);
 	if(evt.keyCode == KEY_LEFT_ARROW) {
         keyHeld_TurnLeft = true;
 		
@@ -59,7 +59,7 @@ var keyHeld_TurnRight = false;
 }
 
 function keyReleased(evt) {
-     console.log("Key pressed: "+evt.keyCode);
+    // console.log("Key pressed: "+evt.keyCode);
     if(evt.keyCode == KEY_LEFT_ARROW) {
         keyHeld_TurnLeft = false;
 		

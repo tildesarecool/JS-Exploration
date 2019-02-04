@@ -19,27 +19,15 @@ function updateAll() {
     drawAll();
 }
 
-
-
-
-
-
-
-
-
-
 function moveAll() {
 	 carMove();
 	
 	carTrackHandling();
 }
 
-
-
 function clearScreen() {
 	colorRect(0,0, canvas.width,canvas.height, 'black'); // clear screen
 }
-
 
 function drawAll() {
     
