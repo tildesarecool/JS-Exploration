@@ -14,20 +14,13 @@ function countLoadedImagesAndLaunchIfReady() {
 
 }
 
-function carImageLoad() {
-    carPic.onload = countLoadedImagesAndLaunchIfReady;
-    carPic.src = "img/player1car.png"
-}
-
-function trackLoadImages() {
-    roadPic.onload = countLoadedImagesAndLaunchIfReady;
-    wallPic.onload = countLoadedImagesAndLaunchIfReady;
-    roadPic.src = "img/track_road.png";
-    wallPic.src = "img/track_wall.png";
+function beginLoadingImage(imgVar, fileName) {
+    imgVar.onload = countLoadedImagesAndLaunchIfReady;
+    imgVar.src = fileName;
 }
 
 function loadImages() {
-    carImageLoad();
-    trackLoadImages();
-
+    beginLoadingImage(carPic, "img/player1car.png");
+    beginLoadingImage(roadPic, "img/track_road.png")
+    beginLoadingImage(wallPic, "img/track_wall.png");
 }
