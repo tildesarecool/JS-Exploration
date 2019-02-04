@@ -3,8 +3,6 @@
 // since re-factoring is happening I split into separate file
 // which git is upposed to make unnecessary but i did it anyway
 
-var roadPic = document.createElement("img");
-var wallPic = document.createElement("img");
 
 
 
@@ -39,10 +37,7 @@ var trackGrid =
     const TRACK_WALL = 1;
     const TRACK_PLAYERSTART = 2;
 
-    function trackLoadImages() {
-        roadPic.src = "img/track_road.png";
-        wallPic.src = "img/track_wall.png";
-    }
+
 
     function isWallAtColRow(col, row) {
         if (col >= 0 && col < TRACK_COLS &&
