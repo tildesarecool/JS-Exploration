@@ -30,6 +30,8 @@ function updateMousePos(evt) {
 }
 
 // 10.75: code for grabbing key codes for press/release
+// this could be converted to a switch/case, right?
+// seems to capture all keystrokes, like f8
 function keyPressed(evt) {
 	 // console.log("Key pressed: "+evt.keyCode);
 	if(evt.keyCode == KEY_LEFT_ARROW) {
