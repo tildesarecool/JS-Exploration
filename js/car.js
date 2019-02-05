@@ -11,6 +11,7 @@ const GROUNDSPEED_DECAY_MULT = 0.94;
 const DRIVE_POWER = 0.5;
 const REVERSE_POWER = 0.2;
 const TURN_RATE = 0.05;
+const MIN_SPEED_TO_TURN = 0.5;
 
 
 
@@ -40,12 +41,15 @@ function carMove() {
         carSpeed -= REVERSE_POWER;
     }
 
-    if (keyHeld_TurnLeft) {
-        carAng -= TURN_RATE;
-    }
+    if (Math.abs(carSpeed) > MIN_SPEED_TO_TURN ) {
 
-    if (keyHeld_TurnRight) {
-        carAng += TURN_RATE;
+        if (keyHeld_TurnLeft) {
+            carAng -= TURN_RATE;
+        }
+
+        if (keyHeld_TurnRight) {
+            carAng += TURN_RATE;
+        }
     }
 
 
