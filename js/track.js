@@ -13,13 +13,14 @@ const TRACK_COLS = 20;
 const TRACK_ROWS = 15; 
 
 
+
 // 1 and 0s instead of true/false
 // coulse also use other numbers for different assets like flags or trees
 // so this is a semi-visual way to layout the track
 var trackGrid = 
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
-    1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 1, 0, 0, 3, 0, 4, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
     1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1,
     1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1,
     1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1,
@@ -36,6 +37,9 @@ var trackGrid =
     const TRACK_ROAD = 0;
     const TRACK_WALL = 1;
     const TRACK_PLAYERSTART = 2;
+    const TRACK_GOAL = 3;
+    const TRACK_TREE = 4;
+    const TRACK_FLAG = 5;
 
 
 
