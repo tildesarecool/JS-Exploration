@@ -1,6 +1,6 @@
 var carPic = document.createElement("img");
 
-var trackPics []; // could use = new Array instead
+var trackPics = new Array; // could use = []] instead, in theory
 
 /*
 var roadPic = document.createElement("img");
