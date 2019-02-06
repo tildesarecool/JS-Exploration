@@ -52,7 +52,7 @@ function loadImages() {
 		if (imageList[i].varName != undefined ) {
 			beginLoadingImage(imageList[i].varName, imageList[i].theFile);
 		} else {
-			loadImageForTrackCode(  imageList[i].trackType, imageList[i].theFile );
+			loadImageForTrackCode(imageList[i].trackType, imageList[i].theFile );
 		}
 	}
 }
