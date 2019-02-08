@@ -1,4 +1,5 @@
 var carPic = document.createElement("img");
+var otherCarPic = document.createElement("img");
 
 var trackPics = new Array; // could use = []] instead, in theory
 
@@ -36,6 +37,7 @@ function loadImages() {
 
 	var imageList = [
 		{varName: carPic,  theFile: "img/player1car.png"},
+		{varName: otherCarPic,  theFile: "img/player2car.png"},
 
 		{trackType: TRACK_ROAD, theFile: "img/track_road.png"},
 		{trackType: TRACK_WALL, theFile: "img/track_wall.png"},
