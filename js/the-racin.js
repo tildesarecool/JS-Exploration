@@ -1,6 +1,8 @@
 var canvas, canvasContext;
 
 var blueCar = new carClass();
+var greenCar = new carClass();
+
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
@@ -17,6 +19,7 @@ function imageLoadingDoneSoStartGame() {
 	setInterval(updateAll, 1000/framesPerSecond);
 
 setupInput();
+greenCar.reset();
 blueCar.reset();
 
 }
@@ -27,9 +30,12 @@ function updateAll() {
 }
 
 function moveAll() {
-	 blueCar.move();
-	
-	carTrackHandling(blueCar);
+    blueCar.move();
+    greenCar.move();
+    
+    // these calls to be replaced/consolidated in car.js
+    // carTrackHandling(greenCar);
+	// carTrackHandling(blueCar);
 }
 
 // clear screen no longer needed (12.93)
@@ -42,6 +48,7 @@ function drawAll() {
     
     //clearScreen();
     drawTracks();
+    greenCar.draw();
     blueCar.draw();
     
     
