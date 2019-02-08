@@ -56,19 +56,19 @@ function isObstacleAtColRow(col, row) {
 
 
 
-    function carTrackHandling() {
-        var carTrackCol = Math.floor(carX / TRACK_W);
-        var carTrackRow = Math.floor(carY / TRACK_H);
+    function carTrackHandling(whichCar) {
+        var carTrackCol = Math.floor(whichCar.x / TRACK_W);
+        var carTrackRow = Math.floor(whichCar.y / TRACK_H);
         var trackIndexUnderCar = rowColToArrayIndex(carTrackCol, carTrackRow);
       
        if (carTrackCol >= 0 && carTrackCol < TRACK_COLS &&
            carTrackRow >= 0 && carTrackRow < TRACK_ROWS) {
     
             if (isObstacleAtColRow(carTrackCol, carTrackRow)) {
-                carX -= Math.cos(carAng) * carSpeed;
-                carY -= Math.sin(carAng) * carSpeed;
+                whichCar.x -= Math.cos(whichCar.ang) * whichCar.speed;
+                whichCar.y -= Math.sin(whichCar.ang) * whichCar.speed;
                 
-                carSpeed *= -0.5; 
+                whichCar.speed *= -0.5; 
     
             } // end of track found
        } // end of valid col and row
@@ -102,34 +102,4 @@ function drawTracks() {
     } // end of each row
 }
     
-
-
-            /*
-            switch(tileKindHere) {
-                case TRACK_ROAD:
-                    useImg = roadPic;
-                    break;
-                case TRACK_WALL:
-                    useImg = wallPic;
-                    break;
-                case TRACK_GOAL:
-                    useImg = goalPic;
-                    break;
-                case TRACK_TREE:
-                    useImg = treePic;
-                    break;
-                case TRACK_FLAG:
-                    useImg = flagPic;
-                    break;
-            }
-*/
-
-/*
-    const TRACK_GOAL = 3;
-    const TRACK_TREE = 4;
-    const TRACK_FLAG = 5;
-
-*/
-
-
 

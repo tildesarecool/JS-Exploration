@@ -8,7 +8,7 @@ function drawBitmapCenteredWithRotation(useBitmap, atX, atY, withAng) {
     // this wasn't explained in detail, only the basics
     canvasContext.save();
     canvasContext.translate(atX, atY);
-    canvasContext.rotate(carAng); // rotate on center of image
+    canvasContext.rotate(withAng); // rotate on center of image
     canvasContext.drawImage(useBitmap, -useBitmap.width / 2, -useBitmap.height / 2); //center image relative to self
     canvasContext.restore(); // forgets things since last save
 
