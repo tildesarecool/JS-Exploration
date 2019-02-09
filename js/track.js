@@ -3,7 +3,7 @@ const TRACK_H = 40;
 const TRACK_GAP = 2;
 const TRACK_COLS = 20;
 const TRACK_ROWS = 15;
-var trackGrid = [4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4,
+var levelOne = [4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4,
 				 4, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
 				 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
 				 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1,
@@ -18,6 +18,8 @@ var trackGrid = [4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4,
 				 0, 3, 0, 0, 0, 0, 1, 4, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1,
 				 0, 3, 0, 0, 0, 0, 1, 4, 4, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1,
 				 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 4];
+
+var trackGrid = [];
 
 const TRACK_ROAD = 0;
 const TRACK_WALL = 1;
@@ -46,7 +48,8 @@ function carTrackHandling(whichCar) {
 		var tileHere = returnTileTypeAtColRow( carTrackCol,carTrackRow );
 
 		if(tileHere == TRACK_GOAL) {
-			console.log(whichCar.name + " WINS!");
+            console.log(whichCar.name + " WINS!");
+            loadLevel(levelOne);
 		} else if(tileHere != TRACK_ROAD) {
 			// next two lines added to fix a bug, mentioned in video 9.6
 			// undoes the car movement which got it onto the wall

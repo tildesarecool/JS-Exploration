@@ -18,10 +18,19 @@ function imageLoadingDoneSoStartGame() {
 	var framesPerSecond = 30;
 	setInterval(updateAll, 1000/framesPerSecond);
 
-    setupInput();
+	setupInput();
+
+	loadLevel(levelOne);
+}
+
+function loadLevel(whichLevel) {
+    trackGrid = whichLevel.slice();
     greenCar.reset(otherCarPic, "Green Machine");
     blueCar.reset(carPic, "Blue Storm");
 
+    //this can be used to set random part of gride map array 
+    //  to a tile type like a flag or tree
+    //levelOne[30] = 4;
 }
 
 function updateAll() {
