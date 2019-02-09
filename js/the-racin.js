@@ -22,7 +22,7 @@ function imageLoadingDoneSoStartGame() {
 
 	loadLevel(levelOne);
 }
-
+ 
 function loadLevel(whichLevel) {
     trackGrid = whichLevel.slice();
     greenCar.reset(otherCarPic, "Green Machine");
