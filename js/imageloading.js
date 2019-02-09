@@ -1,7 +1,7 @@
-var carPic = document.createElement("img");
+//var carPic = document.createElement("img");
 var otherCarPic = document.createElement("img");
 
-var trackPics = new Array; // could use = []] instead, in theory
+var trackPics = []; // could use = new Array instead
 
 /*
 var roadPic = document.createElement("img");
@@ -36,8 +36,8 @@ function loadImages() {
 //	var dataSet = {varName: carPic, theFile: "img/player1car.png"};
 
 	var imageList = [
-		{varName: carPic,  theFile: "img/player1car.png"},
-		{varName: otherCarPic,  theFile: "img/player2car.png"},
+//		{varName: carPic,  theFile: "img/player1car.png"},
+		{varName: otherCarPic,  theFile: "img/warrior.png"},
 
 		{trackType: TRACK_ROAD, theFile: "img/track_road.png"},
 		{trackType: TRACK_WALL, theFile: "img/track_wall.png"},
