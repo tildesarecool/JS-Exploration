@@ -58,7 +58,7 @@ function drawAll() {
     //clearScreen();
     drawTracks();
     greenCar.draw();
-    blueCar.draw();
+   // blueCar.draw();
     
     
 }
